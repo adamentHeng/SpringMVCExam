@@ -1,0 +1,12 @@
+body{
+	background:url("../images/bc.jpg");
+	width: 100% ;
+	height:auto;
+	background-repeat:no-repeat;
+	background-size:100% auto;
+}
+
+.container{
+	margin-top:100px;
+	opacity:0.9;
+}

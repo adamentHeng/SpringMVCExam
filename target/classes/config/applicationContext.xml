@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:tool="http://www.springframework.org/schema/tool"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/tool
+		http://www.springframework.org/schema/tool/spring-tool-4.3.xsd 
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<!-- 组件自动扫描 -->
+	<context:component-scan base-package="com.hand">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	
+	<context:property-placeholder location="classpath*:config/jdbc.properties" />
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!--dataSource属性指定要用到的连接池 -->
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath*:com/hand/dao/*.xml" />
+		<!--configLocation属性指定mybatis的核心配置文件 
+		<property name="configLocation" value="classpath:config/configuration.xml" />-->
+	</bean>
+	
+	<bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">     
+          <property name="dataSource" ref="dataSource"></property>
+    </bean>   
+	
+	 <!-- 事务配置 -->
+	<!--<bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	<tx:annotation-driven transaction-manager="txManager"/> -->
+	
+	<!-- <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		sqlSessionFactory属性指定要用到的SqlSessionFactory实例
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象
+		<property name="mapperInterface" value="dao.UserDao" />
+	</bean> -->
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.hand.dao" />
+	</bean>
+</beans>

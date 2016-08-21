@@ -1,0 +1,58 @@
+body {
+	font-family: 'Microsoft Yahei', 微软雅黑, 宋体, 宋体, arial, 'Hiragino Sans GB',
+		Tahoma, Arial, Helvetica, STHeiti;
+	background-color: #f3f3f4;
+}
+body{
+	background:url("../img/bg.jpg");
+	width: 100% ;
+	height:auto;
+	background-repeat:no-repeat;
+	background-size:100% auto;
+}
+
+.container{
+	margin-top:100px;
+	opacity:0.9;
+}
+
+.box {
+	width: 600px;
+	margin: 150px auto;
+	border: 1px solid #c0c0c0;
+}
+
+hr{
+	border: 1px solid #c0c0c0;
+}
+
+.form-group{
+	text-align: center;
+	padding-left: 30px; 
+}
+.form-horizontal .controls {
+	margin-left: 80px;
+}
+
+.form-horizontal .control-label {
+	width: 72px;
+}
+
+.btn-block {
+	text-align: center;
+	width: 15%;
+	margin-left: 100px;
+	margin-bottom: 20px;
+}
+
+.controls a:hover {
+	cursor: pointer;
+}
+
+input.error {
+	border: 1px solid red;
+}
+
+input.valid {
+	border: 1px solid green;
+}
