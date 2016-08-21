@@ -58,9 +58,8 @@ public class CustomerAction {
 	
 	@RequestMapping("/saveOrUpdate")
 	public String saveOrUpdate(Customer customer){
-		System.out.println("123");
 		customerService.saveOrUpdate(customer);
-		return "redirect:/index.jsp";
+		return "redirect:/pages/index.jsp";
 	}
 	
 	@RequestMapping("/delete")
